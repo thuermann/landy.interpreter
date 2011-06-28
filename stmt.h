@@ -1,15 +1,25 @@
 //
-// $Id: stmt.h,v 1.2 2011/06/28 14:21:36 urs Exp $
+// $Id: stmt.h,v 1.3 2011/06/28 16:27:32 urs Exp $
 //
 
 #ifndef STMT_H
 #define STMT_H
+
+#include <list>
 
 #include "expr.h"
 
 class stmt {
 public:
     virtual void exec() = 0;
+};
+
+class stmt_list : public stmt {
+public:
+    void append(stmt *s);
+    virtual void exec();
+private:
+    std::list<stmt *> slist;
 };
 
 class if_stmt : public stmt {

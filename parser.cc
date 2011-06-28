@@ -1,5 +1,5 @@
 //
-// $Id: parser.cc,v 1.1 2010/11/12 13:08:51 urs Exp $
+// $Id: parser.cc,v 1.2 2011/06/28 14:21:56 urs Exp $
 //
 
 #include "parser.h"
@@ -16,9 +16,6 @@ stmt *parser::parse(std::istream &istream)
 
     static symtab st;
     const double maxuint = ~0U;
-
-    node *n1 = new node("a");
-    st.insert(n1);
 
     expr *var = new variable_expr(st.lookup("a"));
 

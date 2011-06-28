@@ -1,5 +1,5 @@
 //
-// $Id: symtab.h,v 1.2 2011/06/28 14:21:36 urs Exp $
+// $Id: symtab.h,v 1.3 2011/06/28 14:21:56 urs Exp $
 //
 
 #ifndef SYMTAB_H
@@ -18,7 +18,7 @@ public:
 
 class symtab {
 public:
-    node *lookup(std::string name);
+    node *lookup(std::string name, bool insert = true);
     void insert(node *id);
 private:
     std::map<std::string, node *> table;

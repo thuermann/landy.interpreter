@@ -1,5 +1,5 @@
 //
-// $Id: parser.cc,v 1.2 2011/06/28 14:21:56 urs Exp $
+// $Id: parser.cc,v 1.3 2011/06/28 20:41:09 urs Exp $
 //
 
 #include "parser.h"
@@ -7,35 +7,23 @@
 #include "stmt.h"
 #include "expr.h"
 
+extern int yyparse();
+extern stmt *result;
+
+stmt *parser::parse(std::string string)
+{
+    return NULL;
+}
+
 stmt *parser::parse(std::istream &istream)
 {
-    // Quick'n'dirty test of tree build & execution:
+    // I still need to figure out how to best have the flex scanner
+    // read its input from a std::istream or a std::string.
     //
-    // Contruct the statement
-    // for (a = 0; a - ~0; a = a * 2 + 1) print(a);
+    // For now, simply use the default and read from stdin.
 
-    static symtab st;
-    const double maxuint = ~0U;
-
-    expr *var = new variable_expr(st.lookup("a"));
-
-    expr *init = new assign_expr(st.lookup("a"), new const_expr(0));
-    expr *cond = new sub_expr(var, new const_expr(maxuint));
-
-    expr *iter = new assign_expr(
-	st.lookup("a"),
-	new add_expr(
-	    new mul_expr(
-		new variable_expr(st.lookup("a")),
-		new const_expr(2)
-		),
-	    new const_expr(1)
-	    )
-	);
-
-    stmt *body = new print_stmt(var);
-
-    stmt *s = new for_stmt(init, cond, iter, body);
-
-    return s;
+    if (yyparse())
+	return NULL;
+    else
+	return result;
 }

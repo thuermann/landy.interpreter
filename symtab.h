@@ -1,5 +1,5 @@
 //
-// $Id: symtab.h,v 1.1 2010/11/12 13:08:51 urs Exp $
+// $Id: symtab.h,v 1.2 2011/06/28 14:21:36 urs Exp $
 //
 
 #ifndef SYMTAB_H
@@ -13,7 +13,7 @@ public:
     std::string name;
     double value;
 
-    node(std::string name);
+    node(std::string name) : name(name) {}
 };
 
 class symtab {

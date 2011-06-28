@@ -1,15 +1,11 @@
 //
-// $Id: symtab.cc,v 1.1 2010/11/12 13:08:51 urs Exp $
+// $Id: symtab.cc,v 1.2 2011/06/28 14:21:36 urs Exp $
 //
 
 #include <string>
 #include <map>
 
 #include "symtab.h"
-
-node::node(std::string name)
-    : name(name)
-{}
 
 node *symtab::lookup(std::string name)
 {

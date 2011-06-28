@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.1 2010/11/12 13:08:51 urs Exp $
+// $Id: expr.h,v 1.2 2011/06/28 14:21:36 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -14,7 +14,7 @@ public:
 
 class unaryop_expr : public expr {
 public:
-    unaryop_expr(expr *e);
+    unaryop_expr(expr *e) : e(e) {}
     virtual double eval() = 0;
 protected:
     expr *e;
@@ -22,7 +22,7 @@ protected:
 
 class binop_expr : public expr {
 public:
-    binop_expr(expr *left, expr *right);
+    binop_expr(expr *left, expr *right) : left(left), right(right) {}
     virtual double eval() = 0;
 protected:
     expr *left, *right;
@@ -60,7 +60,7 @@ public:
 
 class assign_expr : public expr {
 public:
-    assign_expr(node *id, expr *e);
+    assign_expr(node *id, expr *e) : id(id), e(e) {}
     virtual double eval();
 private:
     node *id;
@@ -69,7 +69,7 @@ private:
 
 class variable_expr : public expr {
 public:
-    variable_expr(node *id);
+    variable_expr(node *id) : id(id) {}
     virtual double eval();
 private:
     node *id;
@@ -77,7 +77,7 @@ private:
 
 class const_expr : public expr {
 public:
-    const_expr(double value);
+    const_expr(double value) : value(value) {}
     virtual double eval();
 private:
     double value;

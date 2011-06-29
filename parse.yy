@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.4 2011/06/29 00:24:58 urs Exp $
+ * $Id: parse.yy,v 1.5 2011/06/29 00:55:46 urs Exp $
  */
 
 %{
@@ -58,7 +58,7 @@ stmt	: '{' stmt_list '}'
 	}
 	| IF '(' expr ')' stmt
 	{
-		$$ = new if_stmt($3, $5, NULL);
+		$$ = new if_stmt($3, $5);
 	}
 	| IF '(' expr ')' stmt ELSE stmt
 	{

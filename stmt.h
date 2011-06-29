@@ -1,5 +1,5 @@
 //
-// $Id: stmt.h,v 1.4 2011/06/29 00:24:58 urs Exp $
+// $Id: stmt.h,v 1.5 2011/06/29 00:55:46 urs Exp $
 //
 
 #ifndef STMT_H
@@ -24,7 +24,8 @@ private:
 
 class if_stmt : public stmt {
 public:
-    if_stmt(expr *cond, stmt *s1, stmt *s2) : cond(cond), s1(s1), s2(s2) {}
+    if_stmt(expr *cond, stmt *s1, stmt *s2 = NULL)
+	: cond(cond), s1(s1), s2(s2) {}
     virtual void exec();
 private:
     expr *cond;

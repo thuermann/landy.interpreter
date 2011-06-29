@@ -1,5 +1,5 @@
 /*
- * $Id: scan.l,v 1.1 2011/06/28 20:41:09 urs Exp $
+ * $Id: scan.l,v 1.2 2011/06/29 00:21:05 urs Exp $
  */
 
 %{
@@ -64,6 +64,16 @@ print				return PRINT;
 	/* some other operators */
 
 [-+*/]				return yytext[0];
+
+"=="				return EQ;
+"!="				return NE;
+"<"				return '<';
+">"				return '>';
+"<="				return LE;
+">="				return GE;
+
+"++"				return INC;
+"--"				return DEC;
 
 	/* punctuation, parenthesis, braces, ... */
 

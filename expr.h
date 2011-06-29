@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.2 2011/06/28 14:21:36 urs Exp $
+// $Id: expr.h,v 1.3 2011/06/29 00:21:05 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -58,6 +58,42 @@ public:
     virtual double eval();
 };
 
+class eq_expr : public binop_expr {
+public:
+    eq_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class ne_expr : public binop_expr {
+public:
+    ne_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class lt_expr : public binop_expr {
+public:
+    lt_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class gt_expr : public binop_expr {
+public:
+    gt_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class le_expr : public binop_expr {
+public:
+    le_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class ge_expr : public binop_expr {
+public:
+    ge_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
 class assign_expr : public expr {
 public:
     assign_expr(node *id, expr *e) : id(id), e(e) {}
@@ -65,6 +101,38 @@ public:
 private:
     node *id;
     expr *e;
+};
+
+class postinc_expr : public expr {
+public:
+    postinc_expr(node *id) : id(id) {}
+    virtual double eval();
+private:
+    node *id;
+};
+
+class postdec_expr : public expr {
+public:
+    postdec_expr(node *id) : id(id) {}
+    virtual double eval();
+private:
+    node *id;
+};
+
+class preinc_expr : public expr {
+public:
+    preinc_expr(node *id) : id(id) {}
+    virtual double eval();
+private:
+    node *id;
+};
+
+class predec_expr : public expr {
+public:
+    predec_expr(node *id) : id(id) {}
+    virtual double eval();
+private:
+    node *id;
 };
 
 class variable_expr : public expr {

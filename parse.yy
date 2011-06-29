@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.3 2011/06/29 00:24:48 urs Exp $
+ * $Id: parse.yy,v 1.4 2011/06/29 00:24:58 urs Exp $
  */
 
 %{
@@ -25,7 +25,7 @@ stmt *result;
 	double    value;
 }
 
-%token	IF ELSE FOR PRINT
+%token	IF ELSE DO WHILE FOR PRINT
 
 %token	<id>	IDENTIFIER
 %token	<value>	NUMBER
@@ -63,6 +63,14 @@ stmt	: '{' stmt_list '}'
 	| IF '(' expr ')' stmt ELSE stmt
 	{
 		$$ = new if_stmt($3, $5, $7);
+	}
+	| DO stmt WHILE '(' expr ')' ';'
+	{
+		$$ = new dowhile_stmt($5, $2);
+	}
+	| WHILE '(' expr ')' stmt
+	{
+		$$ = new while_stmt($3, $5);
 	}
 	| FOR '(' opt_expr ';' opt_expr ';' opt_expr ')' stmt
 	{

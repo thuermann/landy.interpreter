@@ -1,5 +1,5 @@
 //
-// $Id: stmt.cc,v 1.3 2011/06/28 16:27:32 urs Exp $
+// $Id: stmt.cc,v 1.4 2011/06/29 00:24:58 urs Exp $
 //
 
 #include <iostream>
@@ -26,6 +26,19 @@ void if_stmt::exec()
 	s1->exec();
     else if (s2)
 	s2->exec();
+}
+
+void dowhile_stmt::exec()
+{
+    do
+	s->exec();
+    while (cond->eval());
+}
+
+void while_stmt::exec()
+{
+    while (cond->eval())
+	s->exec();
 }
 
 void for_stmt::exec()

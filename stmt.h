@@ -1,5 +1,5 @@
 //
-// $Id: stmt.h,v 1.3 2011/06/28 16:27:32 urs Exp $
+// $Id: stmt.h,v 1.4 2011/06/29 00:24:58 urs Exp $
 //
 
 #ifndef STMT_H
@@ -29,6 +29,24 @@ public:
 private:
     expr *cond;
     stmt *s1, *s2;
+};
+
+class dowhile_stmt : public stmt {
+public:
+    dowhile_stmt(expr *cond, stmt *s) : cond(cond), s(s) {}
+    virtual void exec();
+private:
+    expr *cond;
+    stmt *s;
+};
+
+class while_stmt : public stmt {
+public:
+    while_stmt(expr *cond, stmt *s) : cond(cond), s(s) {}
+    virtual void exec();
+private:
+    expr *cond;
+    stmt *s;
 };
 
 class for_stmt : public stmt {

@@ -1,5 +1,5 @@
 /*
- * $Id: scan.l,v 1.3 2011/06/29 00:24:48 urs Exp $
+ * $Id: scan.l,v 1.4 2011/06/29 00:24:58 urs Exp $
  */
 
 %{
@@ -36,6 +36,8 @@ cbody	\/*([^*/\n]\/*|\*)*
 
 if				return IF;
 else				return ELSE;
+do				return DO;
+while				return WHILE;
 for				return FOR;
 print				return PRINT;
 

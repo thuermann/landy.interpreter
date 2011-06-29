@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.2 2011/06/29 00:21:05 urs Exp $
+ * $Id: parse.yy,v 1.3 2011/06/29 00:24:48 urs Exp $
  */
 
 %{
@@ -39,7 +39,7 @@ stmt *result;
 %left		EQ NE
 %left		'<' '>' LE GE
 %left		'+' '-'
-%left		'*' '/'
+%left		'*' '/' '%'
 %right		NEG INC DEC
 
 %expect 1	/* The dangling else shift/reduce conflict */
@@ -108,6 +108,10 @@ expr	: '(' expr ')'
 	| expr '/' expr
 	{
 		$$ = new div_expr($1, $3);
+	}
+	| expr '%' expr
+	{
+		$$ = new mod_expr($1, $3);
 	}
 	| '-' expr %prec NEG
 	{

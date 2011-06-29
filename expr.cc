@@ -1,6 +1,8 @@
 //
-// $Id: expr.cc,v 1.3 2011/06/29 00:21:05 urs Exp $
+// $Id: expr.cc,v 1.4 2011/06/29 00:24:48 urs Exp $
 //
+
+#include <cmath>
 
 #include "expr.h"
 
@@ -22,6 +24,11 @@ double mul_expr::eval()
 double div_expr::eval()
 {
     return left->eval() / right->eval();
+}
+
+double mod_expr::eval()
+{
+    return fmod(left->eval(), right->eval());
 }
 
 double neg_expr::eval()

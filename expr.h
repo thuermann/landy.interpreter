@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.3 2011/06/29 00:21:05 urs Exp $
+// $Id: expr.h,v 1.4 2011/06/29 00:24:48 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -49,6 +49,12 @@ public:
 class div_expr : public binop_expr {
 public:
     div_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval();
+};
+
+class mod_expr : public binop_expr {
+public:
+    mod_expr(expr *left, expr *right) : binop_expr(left, right) {}
     virtual double eval();
 };
 

@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.5 2011/06/29 00:55:46 urs Exp $
+ * $Id: parse.yy,v 1.6 2011/06/29 01:01:20 urs Exp $
  */
 
 %{
@@ -83,6 +83,10 @@ stmt	: '{' stmt_list '}'
 	| expr ';'
 	{
 		$$ = new expr_stmt($1);
+	}
+	| ';'
+	{
+		$$ = NULL;
 	}
 	;
 

@@ -1,5 +1,5 @@
 //
-// $Id: stmt.cc,v 1.4 2011/06/29 00:24:58 urs Exp $
+// $Id: stmt.cc,v 1.5 2015/06/19 15:31:30 urs Exp $
 //
 
 #include <iostream>
@@ -12,7 +12,7 @@ void stmt_list::append(stmt *s)
     slist.push_back(s);
 }
 
-void stmt_list::exec()
+void stmt_list::exec() const
 {
     std::list<stmt *>::const_iterator it;
 
@@ -20,7 +20,7 @@ void stmt_list::exec()
 	(*it)->exec();
 }
 
-void if_stmt::exec()
+void if_stmt::exec() const
 {
     if (cond->eval())
 	s1->exec();
@@ -28,31 +28,31 @@ void if_stmt::exec()
 	s2->exec();
 }
 
-void dowhile_stmt::exec()
+void dowhile_stmt::exec() const
 {
     do
 	s->exec();
     while (cond->eval());
 }
 
-void while_stmt::exec()
+void while_stmt::exec() const
 {
     while (cond->eval())
 	s->exec();
 }
 
-void for_stmt::exec()
+void for_stmt::exec() const
 {
     for (init->eval(); cond->eval(); iter->eval())
 	s->exec();
 }
 
-void print_stmt::exec()
+void print_stmt::exec() const
 {
     std::cout << std::setprecision(15) << e->eval() << std::endl;
 }
 
-void expr_stmt::exec()
+void expr_stmt::exec() const
 {
     e->eval();
 }

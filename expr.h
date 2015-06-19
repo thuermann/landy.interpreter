@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.4 2011/06/29 00:24:48 urs Exp $
+// $Id: expr.h,v 1.5 2015/06/19 15:31:30 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -9,13 +9,13 @@
 
 class expr {
 public:
-    virtual double eval() = 0;
+    virtual double eval() const = 0;
 };
 
 class unaryop_expr : public expr {
 public:
     unaryop_expr(expr *e) : e(e) {}
-    virtual double eval() = 0;
+    virtual double eval() const = 0;
 protected:
     expr *e;
 };
@@ -23,7 +23,7 @@ protected:
 class binop_expr : public expr {
 public:
     binop_expr(expr *left, expr *right) : left(left), right(right) {}
-    virtual double eval() = 0;
+    virtual double eval() const = 0;
 protected:
     expr *left, *right;
 };
@@ -31,79 +31,79 @@ protected:
 class add_expr : public binop_expr {
 public:
     add_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class sub_expr : public binop_expr {
 public:
     sub_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class mul_expr : public binop_expr {
 public:
     mul_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class div_expr : public binop_expr {
 public:
     div_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class mod_expr : public binop_expr {
 public:
     mod_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class neg_expr : public unaryop_expr {
 public:
     neg_expr(expr *e) : unaryop_expr(e) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class eq_expr : public binop_expr {
 public:
     eq_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class ne_expr : public binop_expr {
 public:
     ne_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class lt_expr : public binop_expr {
 public:
     lt_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class gt_expr : public binop_expr {
 public:
     gt_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class le_expr : public binop_expr {
 public:
     le_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class ge_expr : public binop_expr {
 public:
     ge_expr(expr *left, expr *right) : binop_expr(left, right) {}
-    virtual double eval();
+    virtual double eval() const;
 };
 
 class assign_expr : public expr {
 public:
     assign_expr(node *id, expr *e) : id(id), e(e) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
     expr *e;
@@ -112,7 +112,7 @@ private:
 class postinc_expr : public expr {
 public:
     postinc_expr(node *id) : id(id) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
 };
@@ -120,7 +120,7 @@ private:
 class postdec_expr : public expr {
 public:
     postdec_expr(node *id) : id(id) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
 };
@@ -128,7 +128,7 @@ private:
 class preinc_expr : public expr {
 public:
     preinc_expr(node *id) : id(id) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
 };
@@ -136,7 +136,7 @@ private:
 class predec_expr : public expr {
 public:
     predec_expr(node *id) : id(id) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
 };
@@ -144,7 +144,7 @@ private:
 class variable_expr : public expr {
 public:
     variable_expr(node *id) : id(id) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     node *id;
 };
@@ -152,7 +152,7 @@ private:
 class const_expr : public expr {
 public:
     const_expr(double value) : value(value) {}
-    virtual double eval();
+    virtual double eval() const;
 private:
     double value;
 };

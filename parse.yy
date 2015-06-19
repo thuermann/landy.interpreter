@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.7 2015/06/19 16:36:21 urs Exp $
+ * $Id: parse.yy,v 1.8 2015/06/19 16:37:07 urs Exp $
  */
 
 %{
@@ -35,7 +35,7 @@ stmt *result;
 %type	<slist>	stmt_list
 
 /* Precedence of operators from lowest to highest */
-%right		'='
+%right		'=' ASGNADD ASGNSUB ASGNMUL ASGNDIV ASGNMOD
 %left		LOGOR
 %left		LOGAND
 %left		EQ NE
@@ -186,6 +186,26 @@ expr	: '(' expr ')'
 	| IDENTIFIER '=' expr
 	{
 		$$ = new assign_expr($1, $3);
+	}
+	| IDENTIFIER ASGNADD expr
+	{
+		$$ = new assign_add_expr($1, $3);
+	}
+	| IDENTIFIER ASGNSUB expr
+	{
+		$$ = new assign_sub_expr($1, $3);
+	}
+	| IDENTIFIER ASGNMUL expr
+	{
+		$$ = new assign_mul_expr($1, $3);
+	}
+	| IDENTIFIER ASGNDIV expr
+	{
+		$$ = new assign_div_expr($1, $3);
+	}
+	| IDENTIFIER ASGNMOD expr
+	{
+		$$ = new assign_mod_expr($1, $3);
 	}
 	| IDENTIFIER
 	{

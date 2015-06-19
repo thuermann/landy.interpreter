@@ -1,5 +1,5 @@
 //
-// $Id: expr.cc,v 1.6 2015/06/19 16:36:21 urs Exp $
+// $Id: expr.cc,v 1.7 2015/06/19 16:37:07 urs Exp $
 //
 
 #include <cmath>
@@ -84,6 +84,31 @@ double lognot_expr::eval() const
 double assign_expr::eval() const
 {
     return id->value = e->eval();
+}
+
+double assign_add_expr::eval() const
+{
+    return id->value += e->eval();
+}
+
+double assign_sub_expr::eval() const
+{
+    return id->value -= e->eval();
+}
+
+double assign_mul_expr::eval() const
+{
+    return id->value *= e->eval();
+}
+
+double assign_div_expr::eval() const
+{
+    return id->value /= e->eval();
+}
+
+double assign_mod_expr::eval() const
+{
+    return id->value = fmod(id->value, e->eval());
 }
 
 double postinc_expr::eval() const

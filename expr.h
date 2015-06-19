@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.6 2015/06/19 16:36:21 urs Exp $
+// $Id: expr.h,v 1.7 2015/06/19 16:37:07 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -122,9 +122,39 @@ class assign_expr : public expr {
 public:
     assign_expr(node *id, expr *e) : id(id), e(e) {}
     virtual double eval() const;
-private:
+protected:
     node *id;
     expr *e;
+};
+
+class assign_add_expr : public assign_expr {
+public:
+    assign_add_expr(node *id, expr *e) : assign_expr(id, e) {}
+    virtual double eval() const;
+};
+
+class assign_sub_expr : public assign_expr {
+public:
+    assign_sub_expr(node *id, expr *e) : assign_expr(id, e) {}
+    virtual double eval() const;
+};
+
+class assign_mul_expr : public assign_expr {
+public:
+    assign_mul_expr(node *id, expr *e) : assign_expr(id, e) {}
+    virtual double eval() const;
+};
+
+class assign_div_expr : public assign_expr {
+public:
+    assign_div_expr(node *id, expr *e) : assign_expr(id, e) {}
+    virtual double eval() const;
+};
+
+class assign_mod_expr : public assign_expr {
+public:
+    assign_mod_expr(node *id, expr *e) : assign_expr(id, e) {}
+    virtual double eval() const;
 };
 
 class postinc_expr : public expr {

@@ -1,5 +1,5 @@
 /*
- * $Id: scan.l,v 1.5 2015/06/19 16:36:21 urs Exp $
+ * $Id: scan.l,v 1.6 2015/06/19 16:37:07 urs Exp $
  */
 
 %{
@@ -62,6 +62,11 @@ print				return PRINT;
 	/* assignment operators */
 
 "="				return '=';
+"+="				return ASGNADD;
+"-="				return ASGNSUB;
+"*="				return ASGNMUL;
+"/="				return ASGNDIV;
+"%="				return ASGNMOD;
 
 	/* some other operators */
 

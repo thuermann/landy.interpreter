@@ -1,5 +1,5 @@
 //
-// $Id: expr.cc,v 1.5 2015/06/19 15:31:30 urs Exp $
+// $Id: expr.cc,v 1.6 2015/06/19 16:36:21 urs Exp $
 //
 
 #include <cmath>
@@ -64,6 +64,21 @@ double le_expr::eval() const
 double ge_expr::eval() const
 {
     return left->eval() >= right->eval();
+}
+
+double logand_expr::eval() const
+{
+    return left->eval() && right->eval();
+}
+
+double logor_expr::eval() const
+{
+    return left->eval() || right->eval();
+}
+
+double lognot_expr::eval() const
+{
+    return !e->eval();
 }
 
 double assign_expr::eval() const

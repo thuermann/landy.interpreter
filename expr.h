@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.5 2015/06/19 15:31:30 urs Exp $
+// $Id: expr.h,v 1.6 2015/06/19 16:36:21 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -97,6 +97,24 @@ public:
 class ge_expr : public binop_expr {
 public:
     ge_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval() const;
+};
+
+class logand_expr : public binop_expr {
+public:
+    logand_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval() const;
+};
+
+class logor_expr : public binop_expr {
+public:
+    logor_expr(expr *left, expr *right) : binop_expr(left, right) {}
+    virtual double eval() const;
+};
+
+class lognot_expr : public unaryop_expr {
+public:
+    lognot_expr(expr *e) : unaryop_expr(e) {}
     virtual double eval() const;
 };
 

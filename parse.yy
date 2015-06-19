@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.6 2011/06/29 01:01:20 urs Exp $
+ * $Id: parse.yy,v 1.7 2015/06/19 16:36:21 urs Exp $
  */
 
 %{
@@ -36,11 +36,13 @@ stmt *result;
 
 /* Precedence of operators from lowest to highest */
 %right		'='
+%left		LOGOR
+%left		LOGAND
 %left		EQ NE
 %left		'<' '>' LE GE
 %left		'+' '-'
 %left		'*' '/' '%'
-%right		NEG INC DEC
+%right		'!' NEG INC DEC
 
 %expect 1	/* The dangling else shift/reduce conflict */
 
@@ -152,6 +154,18 @@ expr	: '(' expr ')'
 	| expr GE expr
 	{
 		$$ = new ge_expr($1, $3);
+	}
+	| expr LOGAND expr
+	{
+		$$ = new logand_expr($1, $3);
+	}
+	| expr LOGOR expr
+	{
+		$$ = new logor_expr($1, $3);
+	}
+	| '!' expr
+	{
+		$$ = new lognot_expr($2);
 	}
 	| IDENTIFIER INC
 	{

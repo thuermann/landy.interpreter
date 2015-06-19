@@ -1,11 +1,22 @@
 //
-// $Id: stmt.cc,v 1.5 2015/06/19 15:31:30 urs Exp $
+// $Id: stmt.cc,v 1.6 2015/06/19 16:22:31 urs Exp $
 //
 
 #include <iostream>
 #include <iomanip>
 
 #include "stmt.h"
+
+static int eval(const expr *e)
+{
+    return e ? e->eval() : 1;
+}
+
+void stmt::exec(const stmt *s)
+{
+    if (s)
+	s->exec();
+}
 
 void stmt_list::append(stmt *s)
 {
@@ -17,34 +28,34 @@ void stmt_list::exec() const
     std::list<stmt *>::const_iterator it;
 
     for (it = slist.begin(); it != slist.end(); ++it)
-	(*it)->exec();
+	stmt::exec(*it);
 }
 
 void if_stmt::exec() const
 {
     if (cond->eval())
-	s1->exec();
-    else if (s2)
-	s2->exec();
+	stmt::exec(s1);
+    else
+	stmt::exec(s2);
 }
 
 void dowhile_stmt::exec() const
 {
     do
-	s->exec();
+	stmt::exec(s);
     while (cond->eval());
 }
 
 void while_stmt::exec() const
 {
     while (cond->eval())
-	s->exec();
+	stmt::exec(s);
 }
 
 void for_stmt::exec() const
 {
-    for (init->eval(); cond->eval(); iter->eval())
-	s->exec();
+    for (eval(init); eval(cond); eval(iter))
+	stmt::exec(s);
 }
 
 void print_stmt::exec() const

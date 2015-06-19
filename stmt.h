@@ -1,5 +1,5 @@
 //
-// $Id: stmt.h,v 1.6 2015/06/19 15:31:30 urs Exp $
+// $Id: stmt.h,v 1.7 2015/06/19 16:22:31 urs Exp $
 //
 
 #ifndef STMT_H
@@ -11,6 +11,8 @@
 
 class stmt {
 public:
+    static void exec(const stmt *s);
+
     virtual void exec() const = 0;
 };
 

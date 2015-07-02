@@ -1,11 +1,11 @@
 //
-// $Id: stmt.h,v 1.8 2015/07/02 08:42:12 urs Exp $
+// $Id: stmt.h,v 1.9 2015/07/02 08:47:18 urs Exp $
 //
 
 #ifndef STMT_H
 #define STMT_H
 
-#include <list>
+#include <vector>
 
 #include "expr.h"
 
@@ -23,7 +23,7 @@ public:
     virtual void exec() const;
     virtual void print(std::ostream &os) const;
 private:
-    std::list<stmt *> slist;
+    std::vector<stmt *> slist;
 };
 
 class if_stmt : public stmt {

@@ -1,5 +1,5 @@
 /*
- * $Id: parse.yy,v 1.8 2015/06/19 16:37:07 urs Exp $
+ * $Id: parse.yy,v 1.9 2015/07/07 22:38:16 urs Exp $
  */
 
 %{
@@ -35,7 +35,9 @@ stmt *result;
 %type	<slist>	stmt_list
 
 /* Precedence of operators from lowest to highest */
+%left		','
 %right		'=' ASGNADD ASGNSUB ASGNMUL ASGNDIV ASGNMOD
+%right		'?' ':'
 %left		LOGOR
 %left		LOGAND
 %left		EQ NE
@@ -166,6 +168,14 @@ expr	: '(' expr ')'
 	| '!' expr
 	{
 		$$ = new lognot_expr($2);
+	}
+	| expr '?' expr ':' expr
+	{
+		$$ = new cond_expr($1, $3, $5);
+	}
+	| expr ',' expr
+	{
+		$$ = new comma_expr($1, $3);
 	}
 	| IDENTIFIER INC
 	{

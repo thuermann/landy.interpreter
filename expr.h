@@ -1,5 +1,5 @@
 //
-// $Id: expr.h,v 1.8 2015/07/02 08:42:12 urs Exp $
+// $Id: expr.h,v 1.9 2015/07/07 22:38:16 urs Exp $
 //
 
 #ifndef EXPR_H
@@ -134,6 +134,22 @@ public:
 class lognot_expr : public unaryop_expr {
 public:
     lognot_expr(expr *e) : unaryop_expr(e) {}
+    virtual double eval() const;
+    virtual void print(std::ostream &os) const;
+};
+
+class cond_expr : public expr {
+public:
+    cond_expr(expr *cond, expr *e1, expr *e2) : cond(cond), e1(e1), e2(e2) {}
+    virtual double eval() const;
+    virtual void print(std::ostream &os) const;
+protected:
+    expr *cond, *e1, *e2;
+};
+
+class comma_expr : public binop_expr {
+public:
+    comma_expr(expr *left, expr *right) : binop_expr(left, right) {}
     virtual double eval() const;
     virtual void print(std::ostream &os) const;
 };

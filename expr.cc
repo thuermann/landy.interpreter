@@ -1,5 +1,5 @@
 //
-// $Id: expr.cc,v 1.8 2015/07/02 08:42:12 urs Exp $
+// $Id: expr.cc,v 1.9 2015/07/07 22:38:16 urs Exp $
 //
 
 #include <cmath>
@@ -154,6 +154,26 @@ double lognot_expr::eval() const
 void lognot_expr::print(std::ostream &os) const
 {
     os << "! " << e;
+}
+
+double cond_expr::eval() const
+{
+    return cond->eval() ? e1->eval() : e2->eval();
+}
+
+void cond_expr::print(std::ostream &os) const
+{
+    os << "? " << cond << ' ' << e1 << ' ' << e2;
+}
+
+double comma_expr::eval() const
+{
+    return left->eval(), right->eval();
+}
+
+void comma_expr::print(std::ostream &os) const
+{
+    os << ", " << left << ' ' << right;
 }
 
 double assign_expr::eval() const

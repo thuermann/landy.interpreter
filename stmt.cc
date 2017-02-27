@@ -1,5 +1,5 @@
 //
-// $Id: stmt.cc,v 1.8 2015/07/02 08:47:18 urs Exp $
+// $Id: stmt.cc,v 1.9 2017/02/27 07:04:59 urs Exp $
 //
 
 #include <iostream>
@@ -25,19 +25,15 @@ void stmt_list::append(stmt *s)
 
 void stmt_list::exec() const
 {
-    std::vector<stmt *>::const_iterator it;
-
-    for (it = slist.begin(); it != slist.end(); ++it)
-	stmt::exec(*it);
+    for (auto &s: slist)
+	stmt::exec(s);
 }
 
 void stmt_list::print(std::ostream &os) const
 {
-    std::vector<stmt *>::const_iterator it;
-
     os << "{";
-    for (it = slist.begin(); it != slist.end(); ++it)
-	os << ' ' << *it;
+    for (auto &s: slist)
+	os << ' ' << s;
     os << " }";
 }
 

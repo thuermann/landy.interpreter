@@ -1,5 +1,5 @@
 //
-// $Id: symtab.cc,v 1.3 2011/06/28 14:21:56 urs Exp $
+// $Id: symtab.cc,v 1.4 2017/02/28 15:21:43 urs Exp $
 //
 
 #include <string>
@@ -7,7 +7,7 @@
 
 #include "symtab.h"
 
-node *symtab::lookup(std::string name, bool insert)
+node *symtab::lookup(const std::string &name, bool insert)
 {
     node *&n = table[name];
     if (!n && insert)

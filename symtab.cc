@@ -1,11 +1,17 @@
 //
-// $Id: symtab.cc,v 1.4 2017/02/28 15:21:43 urs Exp $
+// $Id: symtab.cc,v 1.5 2017/02/28 15:22:30 urs Exp $
 //
 
 #include <string>
 #include <map>
 
 #include "symtab.h"
+
+symtab::~symtab()
+{
+    for (auto &pair : table)
+	delete pair.second;
+}
 
 node *symtab::lookup(const std::string &name, bool insert)
 {

@@ -1,5 +1,5 @@
 //
-// $Id: slip.cc,v 1.3 2015/07/02 08:42:12 urs Exp $
+// $Id: slip.cc,v 1.4 2017/02/28 15:22:30 urs Exp $
 //
 
 #include <iostream>
@@ -18,6 +18,8 @@ int main()
 	exit(1);
     std::cout << s << std::endl;
     s->exec();
+
+    delete s;
 
     return 0;
 }
